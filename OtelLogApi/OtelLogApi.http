@@ -1,0 +1,6 @@
+@OtelLogApi_HostAddress = http://localhost:5109
+
+GET {{OtelLogApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
