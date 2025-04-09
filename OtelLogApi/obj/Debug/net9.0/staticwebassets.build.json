@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "o1zjEX5xSnMSZQxnQitCp3Cs3U5OHZKWamWO7Y95Em4=",
+  "Source": "OtelLogApi",
+  "BasePath": "_content/OtelLogApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

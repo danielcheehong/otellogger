@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OtelLogApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b19e53ef844df710c81490ba3f9e9dfad09fced")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7127ddf81cbe54d44d5668b7eeb8da785ce59155")]
 [assembly: System.Reflection.AssemblyProductAttribute("OtelLogApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OtelLogApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

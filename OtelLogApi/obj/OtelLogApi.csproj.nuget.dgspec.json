@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Project\\otellogger\\OtelLogApi\\OtelLogApi.csproj": {}
+    "C:\\Users\\hglo\\OneDrive - GFT Technologies SE\\Documents\\POC\\otellogger\\OtelLogApi\\OtelLogApi.csproj": {}
   },
   "projects": {
-    "C:\\Project\\otellogger\\OtelLogApi\\OtelLogApi.csproj": {
+    "C:\\Users\\hglo\\OneDrive - GFT Technologies SE\\Documents\\POC\\otellogger\\OtelLogApi\\OtelLogApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Project\\otellogger\\OtelLogApi\\OtelLogApi.csproj",
+        "projectUniqueName": "C:\\Users\\hglo\\OneDrive - GFT Technologies SE\\Documents\\POC\\otellogger\\OtelLogApi\\OtelLogApi.csproj",
         "projectName": "OtelLogApi",
-        "projectPath": "C:\\Project\\otellogger\\OtelLogApi\\OtelLogApi.csproj",
-        "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Project\\otellogger\\OtelLogApi\\obj\\",
+        "projectPath": "C:\\Users\\hglo\\OneDrive - GFT Technologies SE\\Documents\\POC\\otellogger\\OtelLogApi\\OtelLogApi.csproj",
+        "packagesPath": "C:\\Users\\hglo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hglo\\OneDrive - GFT Technologies SE\\Documents\\POC\\otellogger\\OtelLogApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\danie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hglo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -62,6 +62,14 @@
             "OpenTelemetry.Instrumentation.AspNetCore": {
               "target": "Package",
               "version": "[1.11.1, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Serilog.Sinks.Splunk": {
+              "target": "Package",
+              "version": "[5.1.0, )"
             }
           },
           "imports": [
@@ -83,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
