@@ -3,18 +3,27 @@ using Serilog.Sinks.Splunk;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Net;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Setup EF Core with SQL Server and Oracle
+
 // Add Serilog for logging
+// Enrich the logs with TraceId, SpanId, and ParentId from the current activity.
+// This is useful for correlating logs with distributed tracing systems like OpenTelemetry.
 Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .Enrich.WithProperty("TraceId", () => System.Diagnostics.Activity.Current?.TraceId.ToString())
+    .Enrich.WithProperty("SpanId", () => System.Diagnostics.Activity.Current?.SpanId.ToString())
+    .Enrich.WithProperty("ParentId", () => System.Diagnostics.Activity.Current?.ParentId)
     .MinimumLevel.Debug()
     .WriteTo.Console()
     .WriteTo.EventCollector(
         splunkHost: "https://localhost:8088",
         eventCollectorToken: "test-hec-token",
-        sourceType: "Weather-Logs",
+        sourceType: "Banking-Doc-Audit-Logs",
         messageHandler: new HttpClientHandler 
         {
             ServerCertificateCustomValidationCallback = (msg, cert, chain, errors) => true
@@ -22,6 +31,9 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 builder.Host.UseSerilog();
+
+// Add OTEL instrumentation support.
+
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -37,30 +49,41 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
+var docClassifications = new[]
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    "Internal", "Strictly Confidential", "Public", "Classified", "PII Restricted"
+}; 
  
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/AuditDocumentLog", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
+    var auditLogs =  Enumerable.Range(0,4).Select(index =>
+        
+        new AuditLog
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
+            "John Doe",
+            $"Document-{index}",
+            "PDF",
+            docClassifications[Random.Shared.Next(docClassifications.Length)]
         ))
         .ToArray();
         
-        Log.Information("Received a request for weather forecast");
-    return forecast;
+        Log.Information("List latest audited downloaded CID Document: {AuditLog}", auditLogs);
+
+    return auditLogs;
 })
-.WithName("GetWeatherForecast");
+.WithName("GetDcomumentLog");
+
+app.MapPost("/AuditDocumentLog", () =>
+{   
+    Log.Information("Posted a request for document log: {AuditLog}");
+    return HttpStatusCode.OK;
+})
+.WithName("AddDcomumentLog");
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+// Create a record to represent a audit log for downloaded document. Include the date, person downloaded the document, document name, document type, and the summary of the document..
+
+
+record AuditLog(DateOnly Date, string Person, string DocumentName, string DocumentType, string Summary);
